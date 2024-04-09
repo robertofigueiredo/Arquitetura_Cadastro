@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace API.Domain.Interfaces
 {
-    public interface IProdutosService
+    public interface IFornecedorService : IDisposable
     {
-        Task AdicionarProduto(Produto produto);
-        Task Atualizar(Produto produto);
+        Task Adicionar(Fornecedor fornecedor);
+        Task Atualizar(Fornecedor fornecedor);
         Task Remover(Guid id);
     }
 }
