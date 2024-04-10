@@ -1,5 +1,4 @@
-﻿
-using API.Domain.Interfaces;
+﻿using API.Domain.Interfaces;
 using API.Domain.Models;
 using API.Domain.Models.Validations;
 
@@ -9,7 +8,7 @@ namespace API.Domain.Services
     {
         private readonly IFornecedorRepository _FornecedorRepository;
 
-        public FornecedorService(IFornecedorRepository FornecedorRepository)
+        public FornecedorService(IFornecedorRepository FornecedorRepository, INotificador notificador) : base(notificador)
         {
             _FornecedorRepository = FornecedorRepository;
         }

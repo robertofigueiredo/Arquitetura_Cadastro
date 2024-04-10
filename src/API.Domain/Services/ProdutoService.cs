@@ -1,11 +1,6 @@
 ﻿using API.Domain.Interfaces;
 using API.Domain.Models;
 using API.Domain.Models.Validations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API.Domain.Services
 {
@@ -13,7 +8,7 @@ namespace API.Domain.Services
     {
         private readonly IProdutoRepository _produtoRepository;
 
-        public ProdutoService(IProdutoRepository produtoRepository)
+        public ProdutoService(IProdutoRepository produtoRepository, INotificador notificador) : base(notificador)
         {
             _produtoRepository = produtoRepository;
         }
