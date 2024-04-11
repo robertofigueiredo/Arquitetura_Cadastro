@@ -1,11 +1,17 @@
-﻿using API.Domain.Models;
+﻿using API.Data.Mapping;
+using API.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace API.Data.Context
 {
-    public class DbContextAPI : DbContext
+    public class CadastroDbContext : DbContext
     {
-        public DbContextAPI(DbContextOptions<DbContextAPI> options) : base(options)
+        public CadastroDbContext()
+        {
+            
+        }
+        public CadastroDbContext(DbContextOptions<CadastroDbContext> options) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
@@ -15,6 +21,10 @@ namespace API.Data.Context
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("DefaultConnection");
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Com base nas Entidades, ele seta nvarchar 100 caso você não tenha fornecido na criação do Mapeamento da Tabela
@@ -24,7 +34,7 @@ namespace API.Data.Context
                 propriedades.SetColumnType("nvarchar(100)");
 
             //Para a inicialização, pega todas as entitidades que estão dentro do assembly
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DbContextAPI).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CadastroDbContext).Assembly);
 
 
             //"Varre" todos os relacionamento de chave estrangeira e seta para nulo, isso impede Delete em cascata
@@ -54,7 +64,6 @@ namespace API.Data.Context
 
             return base.SaveChangesAsync(cancellationToken);
         }
-
 
     }
 }

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Data", "src\API.Data\API.Data.csproj", "{542E2740-7AFC-4FE1-B3C9-3728A6F49EF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Data", "src\API.Data\API.Data.csproj", "{542E2740-7AFC-4FE1-B3C9-3728A6F49EF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Domain", "src\API.Domain\API.Domain.csproj", "{D986C695-8D4C-43DF-BE1F-FADFC45F4099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Domain", "src\API.Domain\API.Domain.csproj", "{D986C695-8D4C-43DF-BE1F-FADFC45F4099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.APICadastro", "API.APICadastro\API.APICadastro.csproj", "{9619A25D-8C3C-459C-8867-79176CA2A1C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D986C695-8D4C-43DF-BE1F-FADFC45F4099}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D986C695-8D4C-43DF-BE1F-FADFC45F4099}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D986C695-8D4C-43DF-BE1F-FADFC45F4099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9619A25D-8C3C-459C-8867-79176CA2A1C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9619A25D-8C3C-459C-8867-79176CA2A1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9619A25D-8C3C-459C-8867-79176CA2A1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9619A25D-8C3C-459C-8867-79176CA2A1C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
