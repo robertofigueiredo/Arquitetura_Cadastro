@@ -6,55 +6,58 @@ using System.Linq.Expressions;
 
 namespace API.Data.Repository
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     {
-        protected readonly CadastroDbContext _dbContext;
-        protected readonly DbSet<TEntity> _Dbset;
+        protected readonly CadastroDbContext Db;
+        protected readonly DbSet<TEntity> DbSet;
 
-        public Repository(CadastroDbContext dbContext)
+        protected Repository(CadastroDbContext db)
         {
-            _dbContext = dbContext;
-            _Dbset = dbContext.Set<TEntity>();
+            Db = db;
+            DbSet = db.Set<TEntity>();
+        }
+        public virtual async Task<TEntity> ObterPorId(Guid id)
+        {
+            return await DbSet.FindAsync(id);
+        }
+        
+        public virtual async Task<List<TEntity>> ObterTodos()
+        {
+            return await DbSet.ToListAsync();
         }
 
-        public Task Adicionar(TEntity entity)
+        public virtual async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
         }
 
-        public Task Atualizar(TEntity entity)
+        public virtual async Task Adicionar(TEntity entity)
         {
-            throw new NotImplementedException();
+            DbSet.Add(entity);
+            await SaveChanges();
         }
 
-        public Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task Atualizar(TEntity entity)
         {
-            throw new NotImplementedException();
+            DbSet.Update(entity);
+        }
+
+        public virtual async Task Remover(Guid id)
+        {
+            DbSet.Remove(new TEntity { Id = id });
+            await SaveChanges();
+        }
+
+        public async Task<int> SaveChanges()
+        {
+            return await Db.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Db.Dispose();
         }
 
-        public Task<TEntity> ObterPorId(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<List<TEntity>> ObterTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Remover(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
